@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Http;
 using yingbinAvenueWeb.Models;
 using yingbinAvenueWeb.Models.dtos;
@@ -19,11 +20,11 @@ namespace yingbinAvenueWeb.Controllers.api
         }
         /// <summary>
         /// TODO: Name需要转码一次
-        /// 默认首页应该是index.html , 修改route
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        [HttpPost]        
+        [HttpPost]     
+        [Route("api/campaign/join")]
         public IHttpActionResult Join(EntryFormDto dto)
         {
             string userIp = GetHostAddress();
@@ -54,13 +55,23 @@ namespace yingbinAvenueWeb.Controllers.api
             }
 
             dto.Phone = dto.Phone.Trim();
-            dto.Name = dto.Name.Trim();  //TODO: Name要转码
+            dto.Name =HttpUtility.UrlDecode(dto.Name).Trim();
             if(!Regex.IsMatch(dto.Phone, @"^\d{8,14}$"))
             {
                 result.ErrorCode = 402;
                 result.Message = "电话格式错误，应该全部为数字。";
                 return Ok(result);
             }
+
+            // dup validation
+            bool duplicate = _context.EntryForms.Any(c => c.MobiPhone == dto.Phone);
+            if (duplicate)
+            {
+                result.ErrorCode = 403;
+                result.Message = "电话号码已存在";
+                return Ok(result);
+            }
+
             // #2. map
             EntryForm form = new EntryForm()
             {
@@ -75,6 +86,14 @@ namespace yingbinAvenueWeb.Controllers.api
 
             // #4. return value
             return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("api/campaign/invokeCount")]
+        public IHttpActionResult InvokeCount()
+        {
+            int cnt = _context.ApiInvokeRecords.Count();
+            return Ok(new { Count = cnt });
         }
 
         public string GetHostAddress()
