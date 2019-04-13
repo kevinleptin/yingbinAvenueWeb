@@ -7,26 +7,23 @@ using System.Web;
 
 namespace yingbinAvenueWeb.Models
 {
-    public class EntryForm
+    public class ApiInvokeRecord
     {
-        public EntryForm()
+        public ApiInvokeRecord()
         {
             CreateOn = DateTime.Now;
         }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [MaxLength(20)]
-        public string UserName { get; set; }
-
-        [MaxLength(15)]
-        [Index(IsUnique = true)]
-        public string MobiPhone { get; set; }
-
+        [MaxLength(200)]
+        public string Path { get; set; }
         public DateTime CreateOn { get; set; }
 
+        /// <summary>
+        /// IP Address
+        /// </summary>
         [MaxLength(50)]
         public string CreateBy { get; set; }
     }

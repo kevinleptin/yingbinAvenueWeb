@@ -161,6 +161,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\api\CampaignController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,7 +171,14 @@
     <Compile Include="Migrations\201904130100149_initdb.Designer.cs">
       <DependentUpon>201904130100149_initdb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904130303264_addRecord.cs" />
+    <Compile Include="Migrations\201904130303264_addRecord.Designer.cs">
+      <DependentUpon>201904130303264_addRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApiInvokeRecord.cs" />
+    <Compile Include="Models\dtos\EntryFormDto.cs" />
+    <Compile Include="Models\dtos\EntryFormResultDto.cs" />
     <Compile Include="Models\EntryForm.cs" />
     <Compile Include="Models\YbAvenueDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +269,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904130100149_initdb.resx">
       <DependentUpon>201904130100149_initdb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904130303264_addRecord.resx">
+      <DependentUpon>201904130303264_addRecord.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
