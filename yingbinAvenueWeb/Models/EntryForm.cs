@@ -18,7 +18,7 @@ namespace yingbinAvenueWeb.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(200)]
         public string UserName { get; set; }
 
         [MaxLength(15)]

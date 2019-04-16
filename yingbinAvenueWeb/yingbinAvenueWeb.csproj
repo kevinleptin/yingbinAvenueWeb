@@ -182,11 +182,16 @@
     <Compile Include="Migrations\201904130303264_addRecord.Designer.cs">
       <DependentUpon>201904130303264_addRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904161222106_simplifyStatics.cs" />
+    <Compile Include="Migrations\201904161222106_simplifyStatics.Designer.cs">
+      <DependentUpon>201904161222106_simplifyStatics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApiInvokeRecord.cs" />
     <Compile Include="Models\dtos\EntryFormDto.cs" />
     <Compile Include="Models\dtos\EntryFormResultDto.cs" />
     <Compile Include="Models\EntryForm.cs" />
+    <Compile Include="Models\SiteStatics.cs" />
     <Compile Include="Models\YbAvenueDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -281,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904130303264_addRecord.resx">
       <DependentUpon>201904130303264_addRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904161222106_simplifyStatics.resx">
+      <DependentUpon>201904161222106_simplifyStatics.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

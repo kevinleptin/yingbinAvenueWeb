@@ -13,13 +13,29 @@ namespace yingbinAvenueWeb.Controllers.api
 {
     public class CampaignController : ApiController
     {
+        protected static object locker = new object();
         YbAvenueDbContext _context = null;
         public CampaignController()
         {
             _context = new YbAvenueDbContext();
         }
+
+        private void IncreaseCounter()
+        {
+            lock (CampaignController.locker)
+            {
+                try
+                {
+                    var statics = _context.Statics.First();
+                    statics.Count++;
+                    _context.SaveChanges();
+                }
+                catch { }
+            }
+        }
+
         /// <summary>
-        /// TODO: Name需要转码一次
+        /// 
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
@@ -28,13 +44,11 @@ namespace yingbinAvenueWeb.Controllers.api
         public IHttpActionResult Join(EntryFormDto dto)
         {
             string userIp = GetHostAddress();
-            ApiInvokeRecord record = new ApiInvokeRecord()
+            try
             {
-                CreateBy = userIp,
-                Path = "/api/Campaign/Join"
-            };
-            _context.ApiInvokeRecords.Add(record);
-            _context.SaveChanges();
+                IncreaseCounter();
+            }
+            catch { }
 
             EntryFormResultDto result = new EntryFormResultDto();
             result.ErrorCode = 200;
@@ -47,7 +61,8 @@ namespace yingbinAvenueWeb.Controllers.api
                 return Ok(result);
             }
 
-            if(dto.Name.Length > 20 || dto.Phone.Length > 15)
+            dto.Name = HttpUtility.UrlDecode(dto.Name).Trim();
+            if (dto.Name.Length > 200 || dto.Phone.Length > 15)
             {
                 result.ErrorCode = 401;
                 result.Message = "姓名和电话长度过长";
@@ -55,7 +70,7 @@ namespace yingbinAvenueWeb.Controllers.api
             }
 
             dto.Phone = dto.Phone.Trim();
-            dto.Name =HttpUtility.UrlDecode(dto.Name).Trim();
+            
             if(!Regex.IsMatch(dto.Phone, @"^\d{8,14}$"))
             {
                 result.ErrorCode = 402;
@@ -82,7 +97,16 @@ namespace yingbinAvenueWeb.Controllers.api
 
             // #3. save to db 
             _context.EntryForms.Add(form);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch
+            {
+                result.ErrorCode = 500;
+                result.Message = "发生错误，请重试";
+                return Ok(result);
+            }
 
             // #4. return value
             return Ok(result);
@@ -92,7 +116,14 @@ namespace yingbinAvenueWeb.Controllers.api
         [Route("api/campaign/invokeCount")]
         public IHttpActionResult InvokeCount()
         {
-            int cnt = _context.ApiInvokeRecords.Count();
+            int cnt = 0;
+            try
+            {
+                lock(CampaignController.locker){
+                    cnt = _context.Statics.First().Count;
+                }
+            }
+            catch { }
             return Ok(new { Count = cnt });
         }
 

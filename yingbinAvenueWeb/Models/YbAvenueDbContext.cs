@@ -14,5 +14,6 @@ namespace yingbinAvenueWeb.Models
         }
         public DbSet<EntryForm> EntryForms { get; set; }
         public DbSet<ApiInvokeRecord> ApiInvokeRecords { get; set; }
+        public DbSet<SiteStatics> Statics { get; set; }
     }
 }
