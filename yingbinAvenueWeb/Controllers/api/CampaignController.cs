@@ -13,26 +13,26 @@ namespace yingbinAvenueWeb.Controllers.api
 {
     public class CampaignController : ApiController
     {
-        protected static object locker = new object();
+        //protected static object locker = new object();
         YbAvenueDbContext _context = null;
         public CampaignController()
         {
             _context = new YbAvenueDbContext();
         }
 
-        private void IncreaseCounter()
-        {
-            lock (CampaignController.locker)
-            {
-                try
-                {
-                    var statics = _context.Statics.First();
-                    statics.Count++;
-                    _context.SaveChanges();
-                }
-                catch { }
-            }
-        }
+        //private void IncreaseCounter()
+        //{
+        //    lock (CampaignController.locker)
+        //    {
+        //        try
+        //        {
+        //            var statics = _context.Statics.First();
+        //            statics.Count++;
+        //            _context.SaveChanges();
+        //        }
+        //        catch { }
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -44,11 +44,11 @@ namespace yingbinAvenueWeb.Controllers.api
         public IHttpActionResult Join(EntryFormDto dto)
         {
             string userIp = GetHostAddress();
-            try
-            {
-                IncreaseCounter();
-            }
-            catch { }
+            //try
+            //{
+            //    IncreaseCounter();
+            //}
+            //catch { }
 
             EntryFormResultDto result = new EntryFormResultDto();
             result.ErrorCode = 200;
@@ -112,20 +112,20 @@ namespace yingbinAvenueWeb.Controllers.api
             return Ok(result);
         }
 
-        [HttpPost]
-        [Route("api/campaign/invokeCount")]
-        public IHttpActionResult InvokeCount()
-        {
-            int cnt = 0;
-            try
-            {
-                lock(CampaignController.locker){
-                    cnt = _context.Statics.First().Count;
-                }
-            }
-            catch { }
-            return Ok(new { Count = cnt });
-        }
+        //[HttpPost]
+        //[Route("api/campaign/invokeCount")]
+        //public IHttpActionResult InvokeCount()
+        //{
+        //    int cnt = 0;
+        //    try
+        //    {
+        //        lock(CampaignController.locker){
+        //            cnt = _context.Statics.First().Count;
+        //        }
+        //    }
+        //    catch { }
+        //    return Ok(new { Count = cnt });
+        //}
 
         public string GetHostAddress()
         {

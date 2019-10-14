@@ -140,6 +140,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig2.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\api\CampaignController.cs" />
+    <Compile Include="Controllers\api\SurveyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -186,12 +188,20 @@
     <Compile Include="Migrations\201904161222106_simplifyStatics.Designer.cs">
       <DependentUpon>201904161222106_simplifyStatics.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910131142409_bayerinit.cs" />
+    <Compile Include="Migrations\201910131142409_bayerinit.Designer.cs">
+      <DependentUpon>201910131142409_bayerinit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Content Include="Migrations\tsql\bayerinit.sql" />
     <Compile Include="Models\ApiInvokeRecord.cs" />
     <Compile Include="Models\dtos\EntryFormDto.cs" />
     <Compile Include="Models\dtos\EntryFormResultDto.cs" />
+    <Compile Include="Models\dtos\SurveyDto.cs" />
+    <Compile Include="Models\dtos\SurveyResultDto.cs" />
     <Compile Include="Models\EntryForm.cs" />
     <Compile Include="Models\SiteStatics.cs" />
+    <Compile Include="Models\SurveyEntity.cs" />
     <Compile Include="Models\YbAvenueDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -246,6 +256,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Templates\bayerexp.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -289,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904161222106_simplifyStatics.resx">
       <DependentUpon>201904161222106_simplifyStatics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910131142409_bayerinit.resx">
+      <DependentUpon>201910131142409_bayerinit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
