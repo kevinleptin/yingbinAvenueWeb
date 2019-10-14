@@ -69,11 +69,11 @@ namespace yingbinAvenueWeb.Controllers.api
             SurveyEntity entity = new SurveyEntity();
             entity.Subject1 = dto.Subject1;
             entity.Subject2 = JsonConvert.SerializeObject(dto.Subject2.Distinct().ToList());
-            entity.Subject3 = HttpUtility.UrlDecode(dto.Subject3).Trim();
-            entity.Subject4 = HttpUtility.UrlDecode(dto.Subject4).Trim();
-            entity.Subject5 = HttpUtility.UrlDecode(dto.Subject5).Trim();
-            entity.Subject6 = HttpUtility.UrlDecode(dto.Subject6).Trim();
-            entity.Subject7 = HttpUtility.UrlDecode(dto.Subject7).Trim();
+            entity.Subject3 = HttpUtility.UrlDecode(dto.Subject3??"").Trim();
+            entity.Subject4 = HttpUtility.UrlDecode(dto.Subject4??"").Trim();
+            entity.Subject5 = HttpUtility.UrlDecode(dto.Subject5??"").Trim();
+            entity.Subject6 = HttpUtility.UrlDecode(dto.Subject6??"").Trim();
+            entity.Subject7 = HttpUtility.UrlDecode(dto.Subject7??"").Trim();
 
             // #3. save to db 
             _context.SurveyEntities.Add(entity);
