@@ -36,10 +36,16 @@ namespace yingbinAvenueWeb.Controllers.api
 
             for(int i = dto.Subject2.Count - 1; i >= 0; i--)
             {
-                if(!(dto.Subject2[i]>=1 && dto.Subject2[i] <= 7))
+                var obj = dto.Subject2[i]??"";
+                int val = 0;
+                if(int.TryParse(obj.ToString(), out val) && obj.GetType() == typeof(Int64))
                 {
-                    dto.Subject2.RemoveAt(i);
+                    if (!(val >= 1 && val <= 6))
+                    {
+                        dto.Subject2.RemoveAt(i);
+                    }
                 }
+                
             }
 
             //string userIp = GetHostAddress();

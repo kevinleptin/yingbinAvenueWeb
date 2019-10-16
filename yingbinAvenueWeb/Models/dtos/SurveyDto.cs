@@ -9,12 +9,12 @@ namespace yingbinAvenueWeb.Models.dtos
     {
         public SurveyDto()
         {
-            Subject2 = new List<int>();
+            Subject2 = new List<object>();
         }
         public int Id { get; set; }
         public string UserLocalId { get; set; }
         public int Subject1 { get; set; }
-        public List<int> Subject2 { get; private set; }
+        public List<object> Subject2 { get; private set; }
         public string Subject3 { get; set; }
         public string Subject4 { get; set; }
         public string Subject5 { get; set; }

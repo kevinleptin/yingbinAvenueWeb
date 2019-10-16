@@ -50,11 +50,25 @@ namespace yingbinAvenueWeb.Controllers
                     ws.Cells[subject1Colname + currentRowIndex].Value = "1";
 
                     string[] subject2Cols = new string[] { "Padding0", "F", "G", "H", "I", "J", "K", "L" };
-                    List<int> lstSubject2Selected = JsonConvert.DeserializeObject<List<int>>(entity.Subject2);
+                    List<object> lstSubject2Selected = JsonConvert.DeserializeObject<List<object>>(entity.Subject2);
                     for(int j = 0; j < lstSubject2Selected.Count; j++)
                     {
-                        string colName = subject2Cols[lstSubject2Selected[j]];
-                        ws.Cells[colName + currentRowIndex].Value = "1";
+                        int idx = 0;
+                        var obj = lstSubject2Selected[j] ?? "";
+                        if(typeof(string) == obj.GetType())
+                        {
+                            string colName = subject2Cols[7];
+                            ws.Cells[colName + currentRowIndex].Value = obj.ToString();
+                        }
+                        else if (int.TryParse(obj.ToString(), out idx))
+                        {
+                            try
+                            {
+                                string colName = subject2Cols[idx];
+                                ws.Cells[colName + currentRowIndex].Value = "1";
+                            }
+                            catch { }
+                        }
                     }
 
                     ws.Cells["M" + currentRowIndex].Value = entity.Subject3;
