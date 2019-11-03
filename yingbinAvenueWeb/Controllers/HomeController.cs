@@ -29,6 +29,36 @@ namespace yingbinAvenueWeb.Controllers
                 return new FileContentResult(Encoding.UTF8.GetBytes("无效的秘钥"), "text/plain; charset=utf-8");
             }
             YbAvenueDbContext context = new YbAvenueDbContext();
+            var data = context.RoseWoodEntities.Select(c => new { c.Id, c.CreateOn, c.UserName, c.MobiPhone, c.Email, c.Province, c.City }).ToList();
+            string filePath = Path.Combine(HttpContext.Server.MapPath("~/excel"), Guid.NewGuid() + ".xlsx");
+            FileInfo fi = new FileInfo(filePath);
+            using (ExcelPackage ep = new ExcelPackage(fi))
+            {
+                ExcelWorksheet ws = ep.Workbook.Worksheets.Add("Info");
+                ws.Cells["A1"].Value = "编号";
+                ws.Cells["B1"].Value = "填写时间";
+                ws.Cells["C1"].Value = "姓名";
+                ws.Cells["D1"].Value = "电话";
+                ws.Cells["E1"].Value = "邮箱";
+                ws.Cells["F1"].Value = "省份 （城市）";
+                ws.Cells["G1"].Value = "城市";
+                ws.Cells["A2"].LoadFromCollection(data);
+                ep.Save();
+            }
+
+            return File(filePath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+
+        }
+
+        public FileResult Data_Survey(string token)
+        {
+            string expectToken = ConfigurationManager.AppSettings["token"];
+            if (string.Compare(expectToken, token, true) != 0)
+            {
+                return new FileContentResult(Encoding.UTF8.GetBytes("无效的秘钥"), "text/plain; charset=utf-8");
+            }
+            YbAvenueDbContext context = new YbAvenueDbContext();
             var data = context.SurveyEntities.ToList();
             string fileExportPath = Path.Combine(HttpContext.Server.MapPath("~/excel"), Guid.NewGuid() + ".xlsx");
             FileInfo fiExport = new FileInfo(fileExportPath);

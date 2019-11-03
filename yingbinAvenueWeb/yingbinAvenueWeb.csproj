@@ -170,6 +170,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\api\CampaignController.cs" />
+    <Compile Include="Controllers\api\RoseWoodController.cs" />
     <Compile Include="Controllers\api\SurveyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -192,14 +193,21 @@
     <Compile Include="Migrations\201910131142409_bayerinit.Designer.cs">
       <DependentUpon>201910131142409_bayerinit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911031252430_forRoseWoodEntity.cs" />
+    <Compile Include="Migrations\201911031252430_forRoseWoodEntity.Designer.cs">
+      <DependentUpon>201911031252430_forRoseWoodEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Content Include="Migrations\tsql\bayerinit.sql" />
     <Compile Include="Models\ApiInvokeRecord.cs" />
     <Compile Include="Models\dtos\EntryFormDto.cs" />
     <Compile Include="Models\dtos\EntryFormResultDto.cs" />
+    <Compile Include="Models\dtos\RosewoodDto.cs" />
+    <Compile Include="Models\dtos\RosewoodResultDto.cs" />
     <Compile Include="Models\dtos\SurveyDto.cs" />
     <Compile Include="Models\dtos\SurveyResultDto.cs" />
     <Compile Include="Models\EntryForm.cs" />
+    <Compile Include="Models\RoseWoodEntity.cs" />
     <Compile Include="Models\SiteStatics.cs" />
     <Compile Include="Models\SurveyEntity.cs" />
     <Compile Include="Models\YbAvenueDbContext.cs" />
@@ -303,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910131142409_bayerinit.resx">
       <DependentUpon>201910131142409_bayerinit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911031252430_forRoseWoodEntity.resx">
+      <DependentUpon>201911031252430_forRoseWoodEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

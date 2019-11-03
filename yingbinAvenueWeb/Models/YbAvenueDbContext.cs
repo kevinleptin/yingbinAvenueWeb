@@ -16,5 +16,7 @@ namespace yingbinAvenueWeb.Models
         public DbSet<ApiInvokeRecord> ApiInvokeRecords { get; set; }
         public DbSet<SiteStatics> Statics { get; set; }
         public DbSet<SurveyEntity>  SurveyEntities { get; set; }
+
+        public DbSet<RoseWoodEntity> RoseWoodEntities { get; set; }
     }
 }
